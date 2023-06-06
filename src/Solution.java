@@ -60,4 +60,20 @@ public class Solution {
         // Return the next of dummyHead, which is the head of our result list.
         return dummyHead.next;
     }
+
+    //3. Longest Substring Without Repeating Characters
+    public int lengthOfLongestSubstring(String s) {
+        String tmp = "";
+        int maxLength = 0;
+
+        for (int i = 0; i < s.length(); i++){
+            if(tmp.indexOf(s.charAt(i)) > -1){
+                tmp = tmp.substring(tmp.indexOf(s.charAt(i)) + 1);
+            }
+            tmp += s.charAt(i);
+            maxLength = Math.max(maxLength, tmp.length());
+        }
+
+        return maxLength;
+    }
 }
