@@ -11,17 +11,6 @@ public class Solution {
          ListNode(int val, ListNode next) { this.val = val; this.next = next; }
      }
 
-    //1502. Can Make Arithmetic Progression From Sequence
-    public boolean canMakeArithmeticProgression(int[] arr) {
-        Arrays.sort(arr);
-        for(int i = 0; i<arr.length-2 ; i++){
-            if (arr[i+1]-arr[i] != arr[i+2]-arr[i+1]){
-                return false;
-            }
-        }
-        return true;
-    }
-
     //2. Add Two Numbers
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         // Create a dummy head for the new linked list.
@@ -75,5 +64,53 @@ public class Solution {
         }
 
         return maxLength;
+    }
+
+    //1318. Minimum Flips to Make a OR b Equal to c
+    public int minFlips(int a, int b, int c) {
+        int flips = 0;
+        while (a > 0 || b > 0 || c > 0) {
+            //Get the AND results of the rightmost bit
+            int bitA = a & 1;
+            int bitB = b & 1;
+            int bitC = c & 1;
+
+            //If C == 0, three conditions can be met
+            //1. A == 0, B == 0 , no flips
+            //2. A == 1, B == 0, one flip
+            //3. A == 1, B == 1, two flips
+            //To calculate the flips needed, the sum of A and B can be used
+            if (bitC == 0) {
+                flips += (bitA + bitB);
+            } else {
+                //If C == 1, three conditions can be met
+                //1. A == 0, B == 0 , one flip
+                //2. A == 1, B == 0, no flips
+                //3. A == 1, B == 1, no flips
+                //Only case 1 need to be considered
+                if (bitA == 0 && bitB == 0) {
+                    flips += 1;
+                }
+            }
+
+            //Shift the bits to the right by 1 time so the last bit now is previously the last second bit
+            //Example, 11001 --> 01100 --> 00110 --> 00011 --> 00001 --> 00000
+            a >>= 1;
+            b >>= 1;
+            c >>= 1;
+        }
+
+        return flips;
+    }
+
+    //1502. Can Make Arithmetic Progression From Sequence
+    public boolean canMakeArithmeticProgression(int[] arr) {
+        Arrays.sort(arr);
+        for(int i = 0; i<arr.length-2 ; i++){
+            if (arr[i+1]-arr[i] != arr[i+2]-arr[i+1]){
+                return false;
+            }
+        }
+        return true;
     }
 }
