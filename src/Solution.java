@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Solution {
 
@@ -10,6 +12,24 @@ public class Solution {
          ListNode(int val) { this.val = val; }
          ListNode(int val, ListNode next) { this.val = val; this.next = next; }
      }
+
+    //1. Two Sum
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer,Integer> map = new HashMap<>();
+        int[] result = new int [2];
+
+        for(int i = 0; i<nums.length; i++){
+            //Checks if this value can be calculated to the target value
+            if(map.containsKey(target-nums[i])){
+                result[1] = i;
+                result[0] = map.get(target-nums[i]);
+                return result;
+            }
+            //Store the new value to a hashmap alongside its index
+            map.put(nums[i],i);
+        }
+        return result;
+    }
 
     //2. Add Two Numbers
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
