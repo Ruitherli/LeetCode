@@ -123,6 +123,23 @@ public class Solution {
         return flips;
     }
 
+    //1351. Count Negative Numbers in a Sorted Matrix
+    public int countNegatives(int[][] grid) {
+        int counter = 0;
+
+        for (int i = 0; i<grid.length; i++){
+            int[] row = grid[i];
+            Arrays.sort(row);
+            for (int j = 0; j<row.length; j++){
+                if (row[j]>=0){
+                    break;
+                } else{
+                    counter++;
+                }
+            }
+        }
+        return counter;
+    }
     //1502. Can Make Arithmetic Progression From Sequence
     public boolean canMakeArithmeticProgression(int[] arr) {
         Arrays.sort(arr);
