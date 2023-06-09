@@ -106,6 +106,38 @@ public class Solution {
         return stack.isEmpty();
     }
 
+    //744. Find Smallest Letter Greater Than Target
+    public char nextGreatestLetter(char[] letters, char target) {
+        // Initialize result to be the maximum character value
+        char result = Character.MAX_VALUE;
+        // Initialize smallest to be the maximum character value
+        char smallest = Character.MAX_VALUE;
+
+        // Iterate over each letter in the input array
+        for (char letter : letters) {
+            // If the current letter is greater than the target
+            // and less than the current result, update result
+            if (letter > target && letter < result) {
+                result = letter;
+            }
+
+            // If the current letter is less than the smallest seen so far,
+            // update smallest
+            if (letter < smallest) {
+                smallest = letter;
+            }
+        }
+
+        // If result is still the maximum character value, this means no letter
+        // greater than the target was found, so return the smallest letter.
+        // Otherwise, return the smallest letter greater than the target.
+        if (result != Character.MAX_VALUE) {
+            return result;
+        } else {
+            return smallest;
+        }
+    }
+
 
     //1318. Minimum Flips to Make a OR b Equal to c
     public int minFlips(int a, int b, int c) {
