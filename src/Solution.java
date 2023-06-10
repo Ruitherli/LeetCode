@@ -2,6 +2,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
+import java.util.stream.IntStream;
 
 public class Solution {
 
@@ -202,5 +203,43 @@ public class Solution {
             }
         }
         return true;
+    }
+    //1802. Maximum Value at a Given Index in a Bounded Array
+    public int maxValue(int n, int index, int maxSum) {
+        int low = 1, high = maxSum; // Initialize the binary search range to [1, maxSum]
+
+        // Perform the binary search
+        while (low < high) {
+            // Calculate the mid value. Note that we add 1 to (high - low) / 2 to ensure that mid is closer to high when low and high are both even.
+            long mid = (high - low + 1) / 2 + low;
+
+            // Calculate the sum of the left subarray
+            long sumLeft = ((mid - index) + (mid - 1)) * index / 2;
+            if (mid <= index) {
+                // If mid is less than or equal to index, the left subarray is a complete arithmetic sequence, so we calculate the sum differently.
+                sumLeft = (mid - 1) * mid / 2 + index - mid + 1;
+            }
+            sumLeft = Math.max(sumLeft, index);  // The sum of the left subarray cannot be less than index.
+
+            // Calculate the sum of the right subarray
+            long sumRight = ((mid - 1) + (mid - (n - 1 - index))) * (n - index - 1) / 2;
+            if (mid <= n - 1 - index) {
+                // If mid is less than or equal to n - 1 - index, the right subarray is a complete arithmetic sequence, so we calculate the sum differently.
+                sumRight = (mid - 1) * mid / 2 + (n - 1 - index - mid) + 1;
+            }
+            sumRight = Math.max(sumRight, n - index - 1);  // The sum of the right subarray cannot be less than n - index - 1.
+
+            // Calculate the total sum
+            long sum = sumLeft + sumRight + mid;
+
+            // If the total sum is greater than maxSum, decrease high. Otherwise, increase low.
+            if (sum > maxSum)
+                high = (int) mid - 1;
+            else
+                low = (int) mid;
+        }
+
+        // After the binary search, low is the maximum value nums[index] can be.
+        return low;
     }
 }
