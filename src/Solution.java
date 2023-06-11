@@ -1,7 +1,4 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class Solution {
@@ -86,6 +83,17 @@ public class Solution {
         }
 
         return maxLength;
+    }
+
+    //9. Palindrome Number
+    public boolean isPalindrome(int x) {
+        String str = String.valueOf(x);
+        StringBuilder reverse = new StringBuilder();
+
+        reverse.append(str);
+        reverse.reverse();
+
+        return str.equals(String.valueOf(reverse));
     }
 
     //20. Valid Parentheses
