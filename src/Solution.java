@@ -98,12 +98,15 @@ public class Solution {
 
     //14. Longest Common Prefix
     public String longestCommonPrefix(String[] strs) {
+         //Base case
         if (strs == null || strs.length == 0) {
             return "";
         }
 
+        //Loop through each string
         for (int i = 0; i < strs[0].length() ; i++){
-            char c = strs[0].charAt(i);
+            char c = strs[0].charAt(i);//Get the char of the first string
+            //Loops through the other strings to check if the char matches the one of the first string
             for (int j = 1; j < strs.length; j ++) {
                 if ( i == strs[j].length() || strs[j].charAt(i) != c)
                     return strs[0].substring(0, i);
