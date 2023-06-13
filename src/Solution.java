@@ -96,6 +96,29 @@ public class Solution {
         return str.equals(String.valueOf(reverse));
     }
 
+    //13. Roman to Integer
+    public static int romanToInt(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+
+        int result = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (i > 0 && map.get(s.charAt(i)) > map.get(s.charAt(i - 1))) {
+                // subtract twice the value of the smaller numeral, since we added it once in the previous iteration
+                result += map.get(s.charAt(i)) - 2 * map.get(s.charAt(i - 1));
+            } else {
+                result += map.get(s.charAt(i));
+            }
+        }
+
+        return result;
+    }
     //14. Longest Common Prefix
     public String longestCommonPrefix(String[] strs) {
          //Base case
