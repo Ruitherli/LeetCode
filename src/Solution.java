@@ -157,6 +157,37 @@ public class Solution {
         return stack.isEmpty();
     }
 
+    //21. Merge Two Sorted Lists
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        // Create a dummy head for the new linked list.
+        ListNode dummyHead = new ListNode(0);
+
+        // Initialize two pointers for the two input lists and the current pointer for the new list.
+        ListNode p = list1, q = list2, curr = dummyHead;
+
+        // Loop through the lists as long as there is a node in at least one of them.
+        while (p != null && q != null) {
+
+            if (p.val<=q.val){
+                curr.next = p;
+
+                p = p.next;
+            } else {
+                curr.next = q;
+                q = q.next;
+            }
+            curr = curr.next;
+        }
+        // If one of the lists is empty, append the other list to the end of the new list.
+        if (p != null) {
+            curr.next = p;
+        } else if (q != null) {
+            curr.next = q;
+        }
+        // Return the next of dummyHead, which is the head of our result list.
+        return dummyHead.next;
+    }
+
     //744. Find Smallest Letter Greater Than Target
     public char nextGreatestLetter(char[] letters, char target) {
         // Initialize result to be the maximum character value
