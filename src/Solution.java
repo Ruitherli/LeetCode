@@ -188,6 +188,20 @@ public class Solution {
         return dummyHead.next;
     }
 
+    //26. Remove Duplicates from Sorted Array
+    public static int removeDuplicates(int[] nums) {
+        if(nums.length == 0) return 0;
+        int i = 0; // pointer to track unique elements
+        for(int j = 1; j < nums.length; j++) { // pointer to scan through the array
+            if(nums[j] != nums[i]) { // if next element is not same as current
+                i++; // move the unique element pointer
+                nums[i] = nums[j]; // copy the next unique element to the new position
+            }
+        }
+        return i + 1; // i is zero-indexed, so add 1 to get count of unique elements
+    }
+
+
     //744. Find Smallest Letter Greater Than Target
     public char nextGreatestLetter(char[] letters, char target) {
         // Initialize result to be the maximum character value
