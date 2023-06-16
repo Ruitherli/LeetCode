@@ -96,6 +96,47 @@ public class Solution {
         return str.equals(String.valueOf(reverse));
     }
 
+    //11. Container With Most Water
+    public int maxArea(int[] height) {
+        int size = height.length;
+        int maxArea = 1;
+
+        for (int i = 0; i<size; i++){
+            int heightOne = height[i];
+            for(int j = 1; j<size; j++){
+                int heightTwo = height[j];
+                int temp = 0;
+                if(heightOne > heightTwo){
+                    temp = heightTwo * (j-i);
+                } else{
+                    temp = heightOne * (j-i);
+                }
+                if (temp > maxArea){
+                    maxArea = temp;
+                }
+            }
+        }
+        return maxArea;
+    }
+    public int maxArea2(int[] height) {
+        int maxArea = 0;
+        int left = 0;
+        int right = height.length - 1;
+
+        while (left < right) {
+            int h = Math.min(height[left], height[right]);
+            maxArea = Math.max(maxArea, h * (right - left));
+
+            if (height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return maxArea;
+    }
+
+
     //13. Roman to Integer
     public static int romanToInt(String s) {
         Map<Character, Integer> map = new HashMap<>();
