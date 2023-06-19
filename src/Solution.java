@@ -222,6 +222,25 @@ public class Solution {
         return result;
     }
 
+    //17. Letter Combinations of a Phone Number
+    String[] mapping = {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    public List<String> letterCombinations(String digits) {
+         List<String> result = new ArrayList<>();
+        if (digits == null || digits.length() == 0) return result;
+        letterCombinationsRecursive(result,digits,"",0);
+        return result;
+    }
+    private void letterCombinationsRecursive(List<String> result, String digits, String current, int index) {
+        if (index == digits.length()) {
+            result.add(current);
+            return;
+        }
+
+        String letters = mapping[digits.charAt(index) - '0'];
+        for (int i = 0; i < letters.length(); i++) {
+            letterCombinationsRecursive(result, digits, current + letters.charAt(i), index + 1);
+        }
+    }
 
     //20. Valid Parentheses
     public boolean isValid(String s) {
