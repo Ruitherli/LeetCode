@@ -85,6 +85,32 @@ public class Solution {
         return maxLength;
     }
 
+    //5. Longest Palindromic Substring
+    private static String expandAroundCenter(String s, int left, int right) {
+        int L = left, R = right;
+        while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
+            L--;
+            R++;
+        }
+        return s.substring(L + 1, R);
+    }
+
+    public static String longestPalindrome(String s) {
+        if (s == null || s.length() < 1) return "";
+        String longest = "";
+        for (int i = 0; i < s.length(); i++) {
+            String temp = expandAroundCenter(s, i, i);
+            if (temp.length() > longest.length()) {
+                longest = temp;
+            }
+            temp = expandAroundCenter(s, i, i + 1);
+            if (temp.length() > longest.length()) {
+                longest = temp;
+            }
+        }
+        return longest;
+    }
+
     //9. Palindrome Number
     public boolean isPalindrome(int x) {
         String str = String.valueOf(x);
