@@ -347,6 +347,19 @@ public class Solution {
         return 0;
     }
 
+    //217. Contains Duplicate
+    public boolean containsDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        int size = nums.length;
+
+        for (int i = 0; i<size-1; i++){
+            if (nums[i] == nums[i+1]){
+                return true;
+            }
+        }
+        return false;
+    }
+
     //744. Find Smallest Letter Greater Than Target
     public char nextGreatestLetter(char[] letters, char target) {
         // Initialize result to be the maximum character value
