@@ -360,6 +360,30 @@ public class Solution {
         return false;
     }
 
+    //242. Valid Anagram
+    public boolean isAnagram(String s, String t) {
+        char[] charsX = s.toCharArray();
+        char[] charsY = t.toCharArray();
+
+        Arrays.sort(charsX);
+        Arrays.sort(charsY);
+
+        String sortedX = new String (charsX);
+        String sortedY = new String (charsY);
+
+        int sizeX = s.length();
+        int sizeY = t.length();
+
+        if(sizeY != sizeX) {return false;}
+
+        for(int i = 0; i<sizeX; i++){
+            if (sortedX.charAt(i) != sortedY.charAt(i)){
+                return false;
+            }
+        }
+        return true;
+    }
+
     //744. Find Smallest Letter Greater Than Target
     public char nextGreatestLetter(char[] letters, char target) {
         // Initialize result to be the maximum character value
