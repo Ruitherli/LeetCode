@@ -331,6 +331,21 @@ public class Solution {
         return i + 1; // i is zero-indexed, so add 1 to get count of unique elements
     }
 
+    //35. Search Insert Position
+    public int searchInsert(int[] nums, int target) {
+        int size = nums.length;
+
+        for (int i = 0; i<size; i++){
+            int x = nums[i];
+            if (x >= target){
+                return i;
+            } else if (i == size-1 && target > x){
+                return i+1;
+            }
+        }
+
+        return 0;
+    }
 
     //744. Find Smallest Letter Greater Than Target
     public char nextGreatestLetter(char[] letters, char target) {
