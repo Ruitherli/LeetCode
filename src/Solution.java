@@ -347,6 +347,26 @@ public class Solution {
         return 0;
     }
 
+    //49. Group Anagrams
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if (strs.length == 0){
+            return Arrays.asList(Arrays.asList(""));
+        }
+
+        Map<String, List<String>> map = new HashMap<>();
+        for (String s : strs) {
+            char[] ca = s.toCharArray();
+            Arrays.sort(ca);
+            String key = String.valueOf(ca);
+            if (!map.containsKey(key)){
+                map.put(key, new ArrayList<>());
+            }
+            map.get(key).add(s);
+        }
+        return new ArrayList<>(map.values());
+    }
+
+
     //217. Contains Duplicate
     public boolean containsDuplicate(int[] nums) {
         Arrays.sort(nums);
