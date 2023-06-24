@@ -404,6 +404,37 @@ public class Solution {
         return true;
     }
 
+    //347. Top K Frequent Elements
+    public int[] topKFrequent(int[] nums, int k) {
+        // Step 1: Count the frequency of each number using a HashMap
+        HashMap<Integer, Integer> count = new HashMap<>();
+        for(int num : nums) {
+            count.put(num, count.getOrDefault(num, 0) + 1);
+        }
+
+        // Step 2: Create a priority queue that keeps the k most frequent elements.
+        // The frequency is the priority. If two elements have the same frequency,
+        // the one with the lower value is considered higher priority.
+        PriorityQueue<Integer> heap = new PriorityQueue<>(
+                (n1, n2) -> count.get(n1).equals(count.get(n2)) ?
+                        n2 - n1 : count.get(n1) - count.get(n2)
+        );
+
+        // Step 3: Build the heap
+        for(int num : count.keySet()) {
+            heap.add(num);
+            if(heap.size() > k) heap.poll();
+        }
+
+        // Step 4: Build the output array
+        int[] top = new int[k];
+        for(int i = k - 1; i >= 0; --i) {
+            top[i] = heap.poll();
+        }
+
+        return top;
+    }
+
     //744. Find Smallest Letter Greater Than Target
     public char nextGreatestLetter(char[] letters, char target) {
         // Initialize result to be the maximum character value
