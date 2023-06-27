@@ -380,6 +380,26 @@ public class Solution {
         return false;
     }
 
+    //238. Product of Array Except Self
+    public int[] productExceptSelf(int[] nums) {
+        int size = nums.length;
+        int[] result = new int[size];
+
+        int prefix = 1;
+        result[0] = 1;
+        for (int i = 0; i < size - 1; i++) {
+            result[i+1] = prefix * nums[i];
+            prefix = prefix * nums[i];
+        }
+
+        int postfix = 1;
+        for (int j = size-1; j != -1; j--){
+            result[j] = postfix * result[j];
+            postfix = postfix * nums[j];
+        }
+        return result;
+    }
+
     //242. Valid Anagram
     public boolean isAnagram(String s, String t) {
         char[] charsX = s.toCharArray();
