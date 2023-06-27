@@ -346,6 +346,34 @@ public class Solution {
 
         return 0;
     }
+    //36. Valid Sudoku
+    public boolean isValidSudoku(char[][] board) {
+        boolean[][] rows = new boolean[9][9];
+        boolean[][] cols = new boolean[9][9];
+        boolean[][] boxes = new boolean[9][9];
+
+        for (int r = 0; r < 9; r++) {
+            for (int c = 0; c < 9; c++) {
+                if (board[r][c] != '.') {
+                    int value = board[r][c] - '1';
+                    int boxIndex = r / 3 * 3 + c / 3;  // This calculates the index of the 3x3 box
+
+                    // Check if this value already exists
+                    if (rows[r][value] || cols[c][value] || boxes[boxIndex][value]) {
+                        return false;
+                    }
+
+                    // Mark as existing
+                    rows[r][value] = true;
+                    cols[c][value] = true;
+                    boxes[boxIndex][value] = true;
+                }
+            }
+        }
+
+        return true;
+    }
+
 
     //49. Group Anagrams
     public List<List<String>> groupAnagrams(String[] strs) {
