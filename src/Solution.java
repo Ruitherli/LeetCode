@@ -394,6 +394,27 @@ public class Solution {
         return new ArrayList<>(map.values());
     }
 
+    //128. Longest Consecutive Sequence
+    public int longestConsecutive(int[] nums) {
+        int size = nums.length;
+
+        if(size == 0){
+            return 0;
+        }
+        int length = 1;
+        Arrays.sort(nums);
+
+        for (int i = 0; i<size-1; i++){
+            if (nums[i+1]==(nums[i]+1)){
+                length++;
+            } else if (nums[i]==nums[i+1]){
+                //Do nothing
+            } else {
+                break;
+            }
+        }
+        return length;
+    }
 
     //217. Contains Duplicate
     public boolean containsDuplicate(int[] nums) {
