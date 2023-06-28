@@ -374,6 +374,45 @@ public class Solution {
         return true;
     }
 
+    //42. Trapping Rain Water
+    public int trap(int[] height) {
+        int size = height.length;
+        int[] volume = new int[size];
+        int waterSpots = 0;
+
+        int leftPointer = 0;
+        int rightPointer = size-1;
+
+        int maxLeft = height[leftPointer];
+        int maxRight = height[rightPointer];
+
+        while (leftPointer != rightPointer){
+            if(maxLeft <= maxRight){
+                leftPointer++;
+                int spots = maxLeft - height[leftPointer];
+                if (spots>0) {
+                    waterSpots += spots;
+                }
+                if(height[leftPointer]>maxLeft){
+                    maxLeft = height[leftPointer];
+                }
+            }else{
+                rightPointer--;
+                int spots = maxRight - height[rightPointer];
+                if (spots>0) {
+                    waterSpots += spots;
+                }
+                if(height[rightPointer]>maxRight){
+                    maxRight = height[rightPointer];
+                }
+            }
+        }
+
+        for(Integer vol : volume){
+            waterSpots = waterSpots + vol;
+        }
+        return waterSpots;
+    }
 
     //49. Group Anagrams
     public List<List<String>> groupAnagrams(String[] strs) {
