@@ -394,6 +394,17 @@ public class Solution {
         return new ArrayList<>(map.values());
     }
 
+    //125. Valid Palindrome
+    public boolean isPalindrome(String s) {
+        StringBuilder reverse = new StringBuilder();
+        String formatted = s.trim().toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
+
+        reverse.append(formatted);
+        reverse.reverse();
+
+        return String.valueOf(reverse).equals(formatted);
+    }
+
     //128. Longest Consecutive Sequence
     public int longestConsecutive(int[] nums) {
         int size = nums.length;
