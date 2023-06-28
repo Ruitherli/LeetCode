@@ -427,6 +427,23 @@ public class Solution {
         return length;
     }
 
+    //167. Two Sum II - Input Array Is Sorted
+    public int[] twoSumII(int[] numbers, int target) {
+        int left = 0, right = numbers.length - 1;
+        while (left < right) {
+            int sum = numbers[left] + numbers[right];
+            if (sum == target) {
+                return new int[] { left + 1, right + 1 };
+            } else if (sum < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
+
+
     //217. Contains Duplicate
     public boolean containsDuplicate(int[] nums) {
         Arrays.sort(nums);
