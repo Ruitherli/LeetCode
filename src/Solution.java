@@ -466,6 +466,41 @@ public class Solution {
         return length;
     }
 
+    //155. Min Stack
+    public class MinStack {
+        private Stack<Integer> stack;
+        private Stack<Integer> minStack;
+
+        /** initialize your data structure here. */
+        public MinStack() {
+            stack = new Stack<>();
+            minStack = new Stack<>();
+        }
+
+        public void push(int val) {
+            if (minStack.isEmpty() || val <= getMin()) {
+                minStack.push(val);
+            }
+            stack.push(val);
+        }
+
+        public void pop() {
+            if (stack.peek().equals(minStack.peek())) {
+                minStack.pop();
+            }
+            stack.pop();
+        }
+
+        public int top() {
+            return stack.peek();
+        }
+
+        public int getMin() {
+            return minStack.peek();
+        }
+    }
+
+
     //167. Two Sum II - Input Array Is Sorted
     public int[] twoSumII(int[] numbers, int target) {
         int left = 0, right = numbers.length - 1;
