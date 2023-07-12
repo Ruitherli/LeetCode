@@ -318,6 +318,27 @@ public class Solution {
         return dummyHead.next;
     }
 
+    //22. Generate Parentheses
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        generateParenthesis(n, n, "", result);
+        return result;
+    }
+
+    private void generateParenthesis(int open, int close, String current, List<String> result) {
+        if (open == 0 && close == 0) {
+            result.add(current);
+            return;
+        }
+
+        if (open > 0) {
+            generateParenthesis(open - 1, close, current + "(", result);
+        }
+        if (close > open) {
+            generateParenthesis(open, close - 1, current + ")", result);
+        }
+    }
+
     //26. Remove Duplicates from Sorted Array
     public static int removeDuplicates(int[] nums) {
         if(nums.length == 0) return 0;
