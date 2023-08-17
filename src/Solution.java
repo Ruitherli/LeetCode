@@ -658,6 +658,21 @@ public class Solution {
         return top;
     }
 
+    //704. Binary Search
+    public int search(int[] nums, int target) {
+        int size = nums.length;
+
+        for(int i = 0; i<size; i++){
+           int value = nums[i];
+
+           if(value == target){
+               return i;
+           }
+        }
+
+        return -1;
+    }
+
     //739. Daily Temperatures
     public int[] dailyTemperatures(int[] temperatures) {
         int n = temperatures.length;
