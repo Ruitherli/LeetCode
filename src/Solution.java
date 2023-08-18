@@ -454,6 +454,27 @@ public class Solution {
         return new ArrayList<>(map.values());
     }
 
+    //74. Search a 2D Matrix
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int rows = matrix.length;
+
+        for(int i = 0; i<rows; i++){
+            int[] values = matrix[i];
+            int size = values.length;
+            Arrays.sort(values);
+            for(int j = 0; j<size; j++){
+                if(values[j]==target){
+                    return true;
+                }
+                if (values[j]>target){
+                    break;
+                }
+            }
+        }
+
+        return false;
+    }
+
     //125. Valid Palindrome
     public boolean isPalindrome(String s) {
         StringBuilder reverse = new StringBuilder();
