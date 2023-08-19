@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Solution {
@@ -743,6 +744,32 @@ public class Solution {
         }
     }
 
+    //875. Koko Eating Bananas
+    public int minEatingSpeed(int[] piles, int h) {
+        int max = Arrays.stream(piles).max().getAsInt();  // Find the max value of piles
+        int pileSize = piles.length;
+
+        int left = 1;
+        int right = max;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            long count = 0;
+
+            for (int pile : piles) {
+                count += (int) Math.ceil((double) pile / mid);
+            }
+
+            if (count > h) { // If it takes more than h hours at this speed, increase speed.
+                left = mid + 1;
+            } else { // If it takes less than or equal to h hours, try reducing speed.
+                right = mid - 1;
+            }
+        }
+
+        return left; // By the end of the loop, left will be the smallest eating speed for which Koko can eat all bananas in h hours.
+
+    }
 
     //1318. Minimum Flips to Make a OR b Equal to c
     public int minFlips(int a, int b, int c) {
