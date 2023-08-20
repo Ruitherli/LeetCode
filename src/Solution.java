@@ -353,6 +353,36 @@ public class Solution {
         return i + 1; // i is zero-indexed, so add 1 to get count of unique elements
     }
 
+    //33. Search in Rotated Sorted Array
+    public int search(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right){
+            int mid = left + (right - left)/2;
+            int midValue = nums[mid];
+
+            if (midValue == target){
+                return mid;
+            }
+
+            if (nums[mid] >= nums[left]){
+                if (target >= nums[left] && target < midValue){
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            } else{
+                if (target <= nums[right] && target > midValue){
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+        }
+        return -1;
+    }
+
     //35. Search Insert Position
     public int searchInsert(int[] nums, int target) {
         int size = nums.length;
@@ -705,7 +735,7 @@ public class Solution {
     }
 
     //704. Binary Search
-    public int search(int[] nums, int target) {
+    public int search2(int[] nums, int target) {
         int size = nums.length;
 
         for(int i = 0; i<size; i++){
