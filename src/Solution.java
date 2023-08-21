@@ -508,6 +508,26 @@ public class Solution {
         return false;
     }
 
+    //121. Best Time to Buy and Sell Stock
+    public int maxProfit(int[] prices) {
+        int left = 0; //Buy at lowest
+        int right = 1; //Sell at highest
+        int maxProfit = 0;
+
+        while (right < prices.length) {
+            if (prices[left] < prices[right]){
+                int profit = prices[right] - prices[left];
+                maxProfit = Math.max(maxProfit,profit);
+
+            } else {
+                left = right;
+            }
+            right++;
+
+        }
+        return maxProfit;
+    }
+
     //125. Valid Palindrome
     public boolean isPalindrome(String s) {
         StringBuilder reverse = new StringBuilder();
