@@ -757,6 +757,32 @@ public class Solution {
         return top;
     }
 
+    //424. Longest Repeating Character Replacement
+    public int characterReplacement(String s, int k) {
+        int size = s.length();
+        int max = 0;
+        int[] charCount = new int[26]; // To keep track of character counts within the window
+        int maxCount = 0; // The character with the maximum count in the current window
+        int left = 0;
+
+        for (int right = 0; right < size; right++) {
+            charCount[s.charAt(right) - 'A']++; // Increment the count of the current character
+            maxCount = Math.max(maxCount, charCount[s.charAt(right) - 'A']);
+
+            // If the difference between the current window size and the max character count
+            // is greater than k, then we need to shrink the window from the left.
+            if (right - left + 1 - maxCount > k) {
+                charCount[s.charAt(left) - 'A']--; // Decrease the count of the character going out of the window
+                left++;
+            }
+
+            max = Math.max(max, right - left + 1);
+        }
+
+        return max;
+    }
+
+
     //704. Binary Search
     public int search2(int[] nums, int target) {
         int left = 0;
