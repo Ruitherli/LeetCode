@@ -511,6 +511,45 @@ public class Solution {
         return false;
     }
 
+    //97. Interleaving String
+    public boolean isInterleave(String s1, String s2, String s3) {
+        int sizeOne = s1.length();
+        int sizeTwo = s2.length();
+        int sizeThree = s3.length();
+
+        if (sizeOne + sizeTwo != sizeThree) {
+            return false;
+        }
+
+        boolean[][] dp = new boolean[sizeOne + 1][sizeTwo + 1];
+        dp[0][0] = true;
+
+        // Initialize the first row
+        for (int i = 1; i <= sizeOne; i++) {
+            dp[i][0] = dp[i - 1][0] && s1.charAt(i - 1) == s3.charAt(i - 1);
+        }
+
+        // Initialize the first column
+        for (int j = 1; j <= sizeTwo; j++) {
+            dp[0][j] = dp[0][j - 1] && s2.charAt(j - 1) == s3.charAt(j - 1);
+        }
+
+        // Fill the rest of the table
+        for (int i = 1; i <= sizeOne; i++) {
+            for (int j = 1; j <= sizeTwo; j++) {
+                if (s1.charAt(i - 1) == s3.charAt(i + j - 1)) {
+                    dp[i][j] = dp[i][j] || dp[i - 1][j];
+                }
+                if (s2.charAt(j - 1) == s3.charAt(i + j - 1)) {
+                    dp[i][j] = dp[i][j] || dp[i][j - 1];
+                }
+            }
+        }
+
+        return dp[sizeOne][sizeTwo];
+    }
+
+
     //121. Best Time to Buy and Sell Stock
     public int maxProfit(int[] prices) {
         int left = 0; //Buy at lowest
