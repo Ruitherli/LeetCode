@@ -821,6 +821,25 @@ public class Solution {
         return max;
     }
 
+    //646. Maximum Length of Pair Chain
+    public int findLongestChain(int[][] pairs) {
+        // Sort pairs based on their end times
+        Arrays.sort(pairs, Comparator.comparingInt(a -> a[1]));
+
+        // Initialize
+        int current = Integer.MIN_VALUE;
+        int count = 0;
+
+        // Iterate through the sorted pairs
+        for (int[] pair : pairs) {
+            if (pair[0] > current) {
+                count++;
+                current = pair[1];
+            }
+        }
+
+        return count;
+    }
 
     //704. Binary Search
     public int search2(int[] nums, int target) {
