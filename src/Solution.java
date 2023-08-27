@@ -796,6 +796,74 @@ public class Solution {
         return top;
     }
 
+    //403. Frog Jump
+    public boolean canCross(int[] stones) {
+        if (stones == null || stones.length == 0) {
+            return false;
+        }
+
+        int n = stones.length;
+        if (n == 1) {
+            return true;
+        }
+
+        if (stones[1] != 1) {
+            return false;
+        }
+
+        // Check if the gap is too large
+        for (int i = 1; i < n; i++) {
+            if (stones[i] - stones[i-1] > i) {
+                return false;
+            }
+        }
+
+        // Last stone's position
+        int lastStone = stones[n - 1];
+
+        // Set of stones for O(1) lookup
+        Set<Integer> stonePositions = new HashSet<>();
+        for (int stone : stones) {
+            stonePositions.add(stone);
+        }
+
+        // For memoization
+        Set<String> visited = new HashSet<>();
+
+        return canCross(stonePositions, visited, 1, 1, lastStone);
+    }
+
+    private boolean canCross(Set<Integer> stonePositions, Set<String> visited, int position, int jump, int lastStone) {
+        // Convert position and jump to a unique string key (for memoization)
+        String key = position + "-" + jump;
+
+        // If we've seen this combination before, return false
+        if (visited.contains(key)) {
+            return false;
+        } else {
+            visited.add(key);
+        }
+
+        // If we're at the last stone, return true
+        if (position == lastStone) {
+            return true;
+        }
+
+        // Check the possible jump sizes: k-1, k, k+1
+        for (int i = -1; i <= 1; i++) {
+            int newJump = jump + i;
+            int newPosition = position + newJump;
+
+            if (newJump > 0 && stonePositions.contains(newPosition)) {
+                if (canCross(stonePositions, visited, newPosition, newJump, lastStone)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     //424. Longest Repeating Character Replacement
     public int characterReplacement(String s, int k) {
         int size = s.length();
