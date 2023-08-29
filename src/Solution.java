@@ -1151,4 +1151,55 @@ public class Solution {
         // After the binary search, low is the maximum value nums[index] can be.
         return low;
     }
+
+    //2483. Minimum Penalty for a Shop
+    /*public int bestClosingTime(String customers) {
+        int hours = customers.length();
+        int closingTime = 0;
+        int minPenalty = Integer.MAX_VALUE;
+
+        for (int i = 0; i < hours; i++){
+            String open = customers.substring(0,i);
+            String closed = customers.substring(i);
+
+            int penalty = 0;
+            for (int j = 0; j < open.length(); j ++){
+                char customer = open.charAt(j);
+                if (customer == 'N'){
+                    penalty++;
+                }
+            }
+
+            for (int k = 0; k < closed.length(); k ++){
+                char customer = closed.charAt(k);
+                if (customer == 'Y'){
+                    penalty++;
+                }
+            }
+            if (penalty < minPenalty){
+                closingTime = i;
+                minPenalty = penalty;
+            }
+        }
+        return closingTime;
+    }*/
+    public int bestClosingTime(String customers) {
+        //Loops through the customers once and update the score
+        //If c is 'Y':
+        //This means a customer is visiting the shop at this hour, so we increment score by 1. This is because if the shop were closed at this hour, it would incur a penalty.
+        //
+        //If c is 'N':
+        //No customer is visiting, so we decrement score by 1. This implies that keeping the shop open at this hour would be wasteful and result in a penalty.
+        int max_score = 0;
+        int score = 0;
+        int best_hour = -1;
+        for(int i = 0; i < customers.length(); ++i) {
+            score += (customers.charAt(i) == 'Y') ? 1 : -1;
+            if(score > max_score) {
+                max_score = score;
+                best_hour = i;
+            }
+        }
+        return best_hour + 1;
+    }
 }
