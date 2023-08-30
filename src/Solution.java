@@ -934,6 +934,32 @@ public class Solution {
         return max;
     }
 
+    //567. Permutation in String
+    public boolean checkInclusion(String s1, String s2) {
+        int sizeOne = s1.length();
+        int sizeTwo = s2.length();
+
+        HashMap<Character, Integer> mapOne = new HashMap<>();
+        for (int i = 0; i < sizeOne; i++) {
+            char currentChar = s1.charAt(i);
+            //Occurrence counter
+            mapOne.put(currentChar, mapOne.getOrDefault(currentChar, 0) + 1);
+        }
+
+        for (int i = 0; i <= sizeTwo-sizeOne; i++){
+            String window = s2.substring(i, i+sizeOne);
+            HashMap<Character, Integer> mapTwo = new HashMap<>();
+            for (int k = 0; k<window.length(); k++) {
+                char currentChar = window.charAt(k);
+                mapTwo.put(currentChar, mapTwo.getOrDefault(currentChar, 0) + 1);
+            }
+            if (mapOne.equals(mapTwo)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     //646. Maximum Length of Pair Chain
     public int findLongestChain(int[][] pairs) {
         // Sort pairs based on their end times
