@@ -939,24 +939,38 @@ public class Solution {
         int sizeOne = s1.length();
         int sizeTwo = s2.length();
 
-        HashMap<Character, Integer> mapOne = new HashMap<>();
-        for (int i = 0; i < sizeOne; i++) {
-            char currentChar = s1.charAt(i);
-            //Occurrence counter
-            mapOne.put(currentChar, mapOne.getOrDefault(currentChar, 0) + 1);
+        //Create two arrays to store occurrences for all alphabets
+        int[] arrOne = new int[26];
+        int[] arrTwo = new int[26];
+
+        if (sizeOne > sizeTwo){
+            return false;
         }
 
-        for (int i = 0; i <= sizeTwo-sizeOne; i++){
-            String window = s2.substring(i, i+sizeOne);
-            HashMap<Character, Integer> mapTwo = new HashMap<>();
-            for (int k = 0; k<window.length(); k++) {
-                char currentChar = window.charAt(k);
-                mapTwo.put(currentChar, mapTwo.getOrDefault(currentChar, 0) + 1);
-            }
-            if (mapOne.equals(mapTwo)){
+        for (int i = 0; i<sizeOne; i++){
+            arrOne[s1.charAt(i)-'a']++;
+            arrTwo[s2.charAt(i)-'a']++;
+        }
+
+        if (Arrays.equals(arrOne,arrTwo)){
+            return true;
+        }
+
+        int front = 0;
+        int back = sizeOne;
+
+        while (back < sizeTwo){
+            arrOne[s1.charAt(front)-'a']--;
+            arrTwo[s2.charAt(back)-'a']++;
+
+            if (Arrays.equals(arrOne,arrTwo)){
                 return true;
             }
+
+            front++;
+            back++;
         }
+
         return false;
     }
 
