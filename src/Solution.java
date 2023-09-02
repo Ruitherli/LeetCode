@@ -602,6 +602,55 @@ public class Solution {
         }
         return length;
     }
+
+    //143. Reorder List
+    public ListNode findMiddle(ListNode head) {
+        ListNode slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+    public ListNode reverse(ListNode head) {
+        ListNode prev = null;
+        while (head != null) {
+            ListNode nextNode = head.next;
+            head.next = prev;
+            prev = head;
+            head = nextNode;
+        }
+        return prev;
+    }
+    public void merge(ListNode l1, ListNode l2) {
+        while (l1 != null && l2 != null) {
+            ListNode temp1 = l1.next;
+            ListNode temp2 = l2.next;
+
+            l1.next = l2;
+            if (temp1 != null) {
+                l2.next = temp1;
+            }
+
+            l1 = temp1;
+            l2 = temp2;
+        }
+    }
+    public void reorderList(ListNode head) {
+        if (head == null || head.next == null || head.next.next == null) return;
+
+        // 1. Find the middle
+        ListNode middle = findMiddle(head);
+        ListNode secondHalf = middle.next;
+        middle.next = null;  // Split the list
+
+        // 2. Reverse the second half
+        secondHalf = reverse(secondHalf);
+
+        // 3. Merge the two halves
+        merge(head, secondHalf);
+    }
+
     //150. Evaluate Reverse Polish Notation
     public int evalRPN(String[] tokens) {
         Stack<Integer> stack = new Stack<>();
