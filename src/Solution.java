@@ -272,6 +272,19 @@ public class Solution {
         }
     }
 
+    //19. Remove Nth Node From End of List
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode p = head, q = head;
+        int counter = 0;
+        while (p != null && p.next != null) {
+            if (counter >= n){
+                q = q.next;
+            }
+            p = p.next;
+            counter++;
+        }
+    }
+
     //20. Valid Parentheses
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<Character>();
