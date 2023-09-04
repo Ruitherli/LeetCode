@@ -276,15 +276,29 @@ public class Solution {
 
     //19. Remove Nth Node From End of List
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode p = head, q = head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode p = dummy, q = dummy;
         int counter = 0;
-        while (p != null && p.next != null) {
-            if (counter >= n){
-                q = q.next;
-            }
+
+        // Move p n steps ahead
+        while (counter <= n) {
             p = p.next;
             counter++;
         }
+
+        // Move both pointers until p reaches the end
+        while (p != null) {
+            p = p.next;
+            q = q.next;
+        }
+
+        // Remove the n-th node from the end
+        q.next = q.next.next;
+
+        // Return the new head
+        return dummy.next;
+
     }
 
     //20. Valid Parentheses
@@ -651,6 +665,22 @@ public class Solution {
         }
 
         return oldToCopy.get(head);
+    }
+
+    //141. Linked List Cycle
+    public boolean hasCycle(ListNode head) {
+        HashSet<ListNode> visited = new HashSet<>();
+
+        ListNode cur = head;
+        while (cur != null){
+            if (visited.contains(cur)){
+                return false;
+            }
+            visited.add(cur);
+            cur = cur.next;
+        }
+
+        return true;
     }
 
     //143. Reorder List
