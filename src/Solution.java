@@ -669,18 +669,18 @@ public class Solution {
 
     //141. Linked List Cycle
     public boolean hasCycle(ListNode head) {
-        HashSet<ListNode> visited = new HashSet<>();
+        ListNode fast = head, slow = head;
 
-        ListNode cur = head;
-        while (cur != null){
-            if (visited.contains(cur)){
-                return false;
+        while (fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+
+            if (fast == slow){
+                return true;
             }
-            visited.add(cur);
-            cur = cur.next;
         }
 
-        return true;
+        return false;
     }
 
     //143. Reorder List
