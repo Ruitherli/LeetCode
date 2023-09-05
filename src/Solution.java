@@ -952,6 +952,28 @@ public class Solution {
         return true;
     }
 
+    //287. Find the Duplicate Number
+        public int findDuplicate(int[] nums) {
+            int slow = 0, fast = 0;
+            while (true) {
+                slow = nums[slow];// same as slow.next()
+                fast = nums[nums[fast]];// same as fast.next().next()
+                if (slow == fast) {
+                    break;
+                }
+            }
+
+            int slow2 = 0;
+            while (true) {
+                slow = nums[slow];
+                slow2 = nums[slow2];
+                if (slow == slow2) {
+                    return slow;
+                }
+            }
+        }
+
+
     //347. Top K Frequent Elements
     public int[] topKFrequent(int[] nums, int k) {
         // Step 1: Count the frequency of each number using a HashMap
