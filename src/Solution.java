@@ -386,6 +386,29 @@ public class Solution {
         return i + 1; // i is zero-indexed, so add 1 to get count of unique elements
     }
 
+    //28. Find the Index of the First Occurrence in a String
+    public int strStr(String haystack, String needle) {
+        int haystackSize = haystack.length();
+        int needleSize = needle.length();
+
+        if (needleSize > haystackSize){
+            return -1;
+        }
+
+        if (needle.equals(haystack)){
+            return 0;
+        }
+
+        for (int i = 0; i <= haystackSize-needleSize; i++){
+            String target = haystack.substring(i,i+needleSize);
+            if (target.equals(needle)){
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     //33. Search in Rotated Sorted Array
     public int search(int[] nums, int target) {
         int left = 0;
