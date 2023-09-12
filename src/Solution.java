@@ -654,6 +654,30 @@ public class Solution {
         return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
     }
 
+    //118. Pascal's Triangle
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> res = new ArrayList<>();
+
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> row = new ArrayList<>();
+            row.add(1); // Every row starts with a '1'
+
+            for (int j = 1; j < i; j++) { // Start from 1 because the 0th element is already added
+                int left = res.get(i-1).get(j-1);  // Left value from the previous row
+                int right = res.get(i-1).get(j);   // Right value from the previous row
+                row.add(left + right);
+            }
+
+            if (i > 0) { // Every row except the first ends with a '1'
+                row.add(1);
+            }
+
+            res.add(row);
+        }
+        return res;
+    }
+
+
     //121. Best Time to Buy and Sell Stock
     public int maxProfit(int[] prices) {
         int left = 0; //Buy at lowest
