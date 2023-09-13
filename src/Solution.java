@@ -731,6 +731,16 @@ public class Solution {
         return length;
     }
 
+    //136. Single Number
+    public int singleNumber(int[] nums) {
+        int result = 0;
+        for (int num : nums) {
+            result ^= num;
+        }
+        return result;
+    }
+
+
     //138. Copy List with Random Pointer
     class Node {
         public int val;
