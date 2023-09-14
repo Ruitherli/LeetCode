@@ -945,6 +945,26 @@ public class Solution {
         throw new IllegalArgumentException("No two sum solution");
     }
 
+    //169. Majority Element
+    public int majorityElement(int[] nums) {
+        int count = 0;
+        Integer candidate = null;
+
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+            count += (num == candidate) ? 1 : -1;
+        }
+
+        // The second pass to confirm the candidate is the majority is optional
+        // since the problem states a majority will always exist.
+        // If not guaranteed, you'd iterate over nums again and ensure candidate appears more than n/2 times.
+
+        return candidate;
+    }
+
+
     //206. Reverse Linked List
     public ListNode reverseList(ListNode head) {
         ListNode prev = null;
