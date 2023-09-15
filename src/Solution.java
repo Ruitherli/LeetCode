@@ -1102,6 +1102,24 @@ public class Solution {
         return true;
     }
 
+    //283. Move Zeroes
+    public void moveZeroes(int[] nums) {
+        int count = 0;  // position to place the next non-zero value
+
+        // First loop: Move all non-zeroes to the beginning
+        for (int num : nums) {
+            if (num != 0) {
+                nums[count++] = num;
+            }
+        }
+
+        // Fill in zeroes for the remaining positions
+        while (count < nums.length) {
+            nums[count++] = 0;
+        }
+    }
+
+
     //287. Find the Duplicate Number
         public int findDuplicate(int[] nums) {
             int slow = 0, fast = 0;
