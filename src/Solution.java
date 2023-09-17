@@ -1544,6 +1544,23 @@ public class Solution {
         }
         return true;
     }
+
+    //1436. Destination City
+    public String destCity(List<List<String>> paths) {
+        HashMap<String, String> hashMap = new HashMap<>();
+
+        for (List<String> path : paths){
+            hashMap.put(path.get(0),path.get(1));
+        }
+
+        for (String city :hashMap.values()){
+            if (!hashMap.containsKey(city)){
+                return city;
+            }
+        }
+        return null;
+    }
+
     //1802. Maximum Value at a Given Index in a Bounded Array
     public int maxValue(int n, int index, int maxSum) {
         int low = 1, high = maxSum; // Initialize the binary search range to [1, maxSum]
