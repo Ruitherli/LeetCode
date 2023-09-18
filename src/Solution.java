@@ -522,6 +522,30 @@ public class Solution {
         return waterSpots;
     }
 
+    //46. Permutations
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        backtrack(result, new ArrayList<>(), nums);
+        return result;
+    }
+
+    private void backtrack(List<List<Integer>> result, List<Integer> currentPermutation, int[] nums) {
+        // Base case: if the current permutation's length is equal to the original array's length,
+        // add it to the result.
+        if (currentPermutation.size() == nums.length) {
+            result.add(new ArrayList<>(currentPermutation));
+            return;
+        }
+
+        // Recursive step: for every number in the original list that's not yet used in the current permutation,
+        // append it to the current permutation and recurse.
+        for (int i = 0; i < nums.length; i++) {
+            if (currentPermutation.contains(nums[i])) continue;  // skip if element already used
+            currentPermutation.add(nums[i]);
+            backtrack(result, currentPermutation, nums);
+            currentPermutation.remove(currentPermutation.size() - 1);  // remove the last element to backtrack
+        }
+    }
     //49. Group Anagrams
     public List<List<String>> groupAnagrams(String[] strs) {
         if (strs.length == 0){
