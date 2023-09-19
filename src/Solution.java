@@ -743,6 +743,21 @@ public class Solution {
         return res;
     }
 
+    //119. Pascal's Triangle II
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> row = new ArrayList<>();
+        row.add(1);  // Initialize with the 0th row.
+
+        for (int i = 1; i <= rowIndex; i++) {
+            for (int j = row.size() - 1; j > 0; j--) {
+                row.set(j, row.get(j) + row.get(j - 1));
+            }
+            row.add(1);  // Append 1 at the end of each iteration.
+        }
+
+        return row;
+    }
+
 
     //121. Best Time to Buy and Sell Stock
     public int maxProfit(int[] prices) {
