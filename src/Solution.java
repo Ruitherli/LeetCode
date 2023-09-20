@@ -1045,6 +1045,16 @@ public class Solution {
         return candidate;
     }
 
+    //191. Number of 1 Bits
+    public int hammingWeight(int n) {
+        int count = 0;
+        while (n != 0) {
+            count++;
+            n &= (n - 1);
+        }
+        return count;
+    }
+
 
     //206. Reverse Linked List
     public ListNode reverseList(ListNode head) {
