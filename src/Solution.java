@@ -1103,6 +1103,24 @@ public class Solution {
         return false;
     }
 
+    //219. Contains Duplicate II
+    public static boolean containsNearbyDuplicate(int[] nums, int k) {
+        int size = nums.length;
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i<size; i++){
+            int val = nums[i];
+            if (hashMap.containsKey(val)){
+                int index = hashMap.get(val);
+                if (Math.abs(index-i)<=k){
+                    return true;
+                }
+                hashMap.replace(val,i);
+            }else {
+                hashMap.put(val,i);
+            }
+        }
+        return false;
+    }
 
     //225. Implement Stack using Queues
     class MyStack {
