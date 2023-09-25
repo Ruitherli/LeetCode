@@ -1242,6 +1242,14 @@ public class Solution {
         return num % 9;
     }
 
+    //268. Missing Number
+    public int missingNumber(int[] nums) {
+        int missing = nums.length; // Initialize missing as n
+        for (int i = 0; i < nums.length; i++) {
+            missing ^= i ^ nums[i];
+        }
+        return missing;
+    }
 
     //283. Move Zeroes
     public void moveZeroes(int[] nums) {
