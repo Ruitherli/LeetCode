@@ -1305,6 +1305,15 @@ public class Solution {
         return ans;
     }
 
+    //344. Reverse String
+    public void reverseString(char[] s) {
+        int size = s.length;
+        for (int i = 0; i<size/2; i++){
+            char temp = s[i];
+            s[i] = s[size-i-1];
+            s[size-i-1] = temp;
+        }
+    }
 
     //347. Top K Frequent Elements
     public int[] topKFrequent(int[] nums, int k) {
