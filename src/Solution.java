@@ -1414,6 +1414,28 @@ public class Solution {
         return false;
     }
 
+    //412. Fizz Buzz
+    public List<String> fizzBuzz(int n) {
+        List<String> res = new ArrayList<>();
+
+        for (int i = 0; i<=n; i++){
+            String str = "";
+            if (i%3==0){
+                str += "Fizz";
+            }
+            if (i%5==0){
+                str += "Buzz";
+            }
+            if (str.contains("Fizz")||str.contains("Buzz")){
+                res.add(String.valueOf(i));
+            } else{
+                res.add(str);
+            }
+        }
+        return res;
+    }
+
+
     //424. Longest Repeating Character Replacement
     public int characterReplacement(String s, int k) {
         int size = s.length();
