@@ -1346,6 +1346,41 @@ public class Solution {
         return top;
     }
 
+    //349. Intersection of Two Arrays
+    public int[] intersection(int[] nums1, int[] nums2) {
+        // Create two HashSet to store unique elements from each array
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> set2 = new HashSet<>();
+
+        // Add elements from nums1 to set1
+        for (int num : nums1) {
+            set1.add(num);
+        }
+
+        // Add elements from nums2 to set2
+        for (int num : nums2) {
+            set2.add(num);
+        }
+
+        // Create a result list to store the intersection
+        List<Integer> result = new ArrayList<>();
+
+        // Iterate through set1 and check if the element is in set2
+        for (int num : set1) {
+            if (set2.contains(num)) {
+                result.add(num);
+            }
+        }
+
+        // Convert the result list to an array
+        int[] intersectionArray = new int[result.size()];
+        for (int i = 0; i < result.size(); i++) {
+            intersectionArray[i] = result.get(i);
+        }
+
+        return intersectionArray;
+    }
+
     //403. Frog Jump
     public boolean canCross(int[] stones) {
         if (stones == null || stones.length == 0) {
