@@ -1496,6 +1496,20 @@ public class Solution {
         return max;
     }
 
+    //461. Hamming Distance
+    public int hammingDistance(int x, int y) {
+        int n = x ^ y;
+
+        int count = 0;
+        String res = Integer.toBinaryString(n);
+        for (int i = 0; i<res.length(); i++){
+            if (res.charAt(i)=='1'){
+                count++;
+            }
+        }
+        return count;
+    }
+
     //543. Diameter of Binary Tree
     int result = -1;
 
